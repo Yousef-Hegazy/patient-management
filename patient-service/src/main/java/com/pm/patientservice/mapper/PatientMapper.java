@@ -23,7 +23,6 @@ public class PatientMapper {
                 .email(dto.email())
                 .dateOfBirth(dto.dateOfBirth())
                 .name(dto.name())
-                .registeredDate(new Date(dto.registeredDate()))
                 .build();
     }
 }

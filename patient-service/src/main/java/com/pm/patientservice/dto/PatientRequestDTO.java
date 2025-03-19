@@ -22,7 +22,7 @@ public record PatientRequestDTO(
 
         @NotBlank(message = "Date of Birth is required")
         @NotEmpty(message = "Date of Birth is required")
-        LocalDate dateOfBirth,
+        String dateOfBirth,
 
         @NotBlank(message = "Registered Date is required")
         @NotEmpty(message = "Registered Date is required")

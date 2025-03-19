@@ -25,6 +25,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientResponseDTO createPatient(PatientRequestDTO patient) {
-        return PatientMapper.toEntity(patient);
+        if (patientRepository.existsByEmail(patient.email())) {
+            throw new IllegalArgumentException("Email is used by another patient");
+        }
+        return PatientMapper.toDto(patientRepository.save(PatientMapper.toEntity(patient)));
     }
 }

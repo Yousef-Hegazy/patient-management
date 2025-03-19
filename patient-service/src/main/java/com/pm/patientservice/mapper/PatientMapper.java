@@ -4,6 +4,7 @@ import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
 import com.pm.patientservice.model.Patient;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PatientMapper {
@@ -21,8 +22,9 @@ public class PatientMapper {
         return Patient.builder()
                 .address(dto.address())
                 .email(dto.email())
-                .dateOfBirth(dto.dateOfBirth())
+                .dateOfBirth(LocalDate.parse(dto.dateOfBirth()))
                 .name(dto.name())
+                .registeredDate(LocalDate.parse(dto.registeredDate()))
                 .build();
     }
 }

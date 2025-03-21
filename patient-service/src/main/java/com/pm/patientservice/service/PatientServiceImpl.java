@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,30 @@ public class PatientServiceImpl implements PatientService {
         if (patientRepository.existsByEmail(patient.email())) {
             throw new IllegalArgumentException("Email is used by another patient");
         }
+
         return PatientMapper.toDto(patientRepository.save(PatientMapper.toEntity(patient)));
+    }
+
+    @Override
+    public PatientResponseDTO updatePatient(UUID id, PatientRequestDTO patientRequestDTO) {
+        var patient = patientRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Patient not found"));
+
+
+        if (patientRepository.existsByEmailAndIdNot(patientRequestDTO.email(), patient.getId())) {
+            throw new IllegalArgumentException("Email is used by another patient");
+        }
+
+        var updatedPatient = PatientMapper.toEntity(patientRequestDTO);
+
+        updatedPatient.setRegisteredDate(patient.getRegisteredDate());
+        updatedPatient.setId(id);
+
+        return PatientMapper.toDto(patientRepository.save(updatedPatient));
+    }
+
+    @Override
+    public void deletePatient(UUID id) {
+        patientRepository.deleteById(id);
     }
 }

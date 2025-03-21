@@ -2,10 +2,10 @@ package com.pm.patientservice.mapper;
 
 import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
+import com.pm.patientservice.dto.PatientUpdateDTO;
 import com.pm.patientservice.model.Patient;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class PatientMapper {
     public static PatientResponseDTO toDto(Patient patient) {
@@ -20,11 +20,20 @@ public class PatientMapper {
 
     public static Patient toEntity(PatientRequestDTO dto) {
         return Patient.builder()
-                .address(dto.address())
-                .email(dto.email())
-                .dateOfBirth(LocalDate.parse(dto.dateOfBirth()))
                 .name(dto.name())
-                .registeredDate(LocalDate.parse(dto.registeredDate()))
+                .email(dto.email())
+                .address(dto.address())
+                .dateOfBirth(LocalDate.parse(dto.dateOfBirth()))
+                .registeredDate(dto.registeredDate() != null ? LocalDate.parse(dto.registeredDate()) : null)
+                .build();
+    }
+
+    public static Patient toEntity(PatientUpdateDTO dto) {
+        return Patient.builder()
+                .name(dto.name())
+                .email(dto.email())
+                .address(dto.address())
+                .dateOfBirth(LocalDate.parse(dto.dateOfBirth()))
                 .build();
     }
 }

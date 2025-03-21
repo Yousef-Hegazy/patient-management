@@ -4,8 +4,14 @@ import com.pm.patientservice.dto.PatientRequestDTO;
 import com.pm.patientservice.dto.PatientResponseDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PatientService {
-    public List<PatientResponseDTO> getPatients();
-    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO);
+    List<PatientResponseDTO> getPatients();
+
+    PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO);
+
+    PatientResponseDTO updatePatient(UUID id, PatientRequestDTO patientRequestDTO);
+
+    void deletePatient(UUID id);
 }

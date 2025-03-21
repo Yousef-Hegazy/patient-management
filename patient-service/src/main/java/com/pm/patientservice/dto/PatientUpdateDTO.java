@@ -1,11 +1,10 @@
 package com.pm.patientservice.dto;
 
-import com.pm.patientservice.dto.validators.CreatePatientValidationGroup;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
-public record PatientRequestDTO(
+public record PatientUpdateDTO(
         @NotBlank(message = "Name is required")
         @NotEmpty(message = "Name is required")
         String name,
@@ -21,10 +20,6 @@ public record PatientRequestDTO(
 
         @NotBlank(message = "Date of Birth is required")
         @NotEmpty(message = "Date of Birth is required")
-        String dateOfBirth,
-
-        @NotBlank(message = "Registered Date is required", groups = CreatePatientValidationGroup.class)
-        @NotEmpty(message = "Registered Date is required", groups = CreatePatientValidationGroup.class)
-        String registeredDate
+        String dateOfBirth
 ) {
 }
